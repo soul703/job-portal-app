@@ -1,9 +1,17 @@
 package org.example.jobportalapp.dto.ApiResponse;
 
-public class ApiResponse <T> {
-    private final String message;
-    private final T data;
-    private final boolean success;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ApiResponse<T> {
 
    public static <T> ApiResponse<T> success(String message, T data) {
         return new ApiResponse<>(message, data, true);
