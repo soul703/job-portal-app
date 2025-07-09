@@ -4,7 +4,8 @@ import jakarta.validation.constraints.Email;
 
 public record UserUpdateDTO(
         String fullName,
-        @Email String email,
+        @Email(message = "Email must be valid")
+        String email,
         String phoneNumber,
         String address
 ) {}

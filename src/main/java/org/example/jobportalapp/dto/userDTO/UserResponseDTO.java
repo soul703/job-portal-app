@@ -1,7 +1,9 @@
 package org.example.jobportalapp.dto.userDTO;
 
+import java.util.UUID;
+
 public record UserResponseDTO(
-        String id,
+        UUID id,
         String fullName,
         String email,
         String phoneNumber,

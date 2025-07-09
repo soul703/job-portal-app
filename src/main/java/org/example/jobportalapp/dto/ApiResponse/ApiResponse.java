@@ -26,25 +26,24 @@ public class ApiResponse<T> {
         return new ApiResponse<>("SUCCESS", message, data, null);
     }
 
+    /**
+     * Phương thức static để tạo response thành công không kèm dữ liệu.
+     */
+    public static <T> ApiResponse<T> success(String message) {
+        return new ApiResponse<>("SUCCESS", message, null, null);
+    }
+
+    /**
+     * Phương thức static để tạo response thất bại kèm lỗi chi tiết.
+     */
+    public static <T> ApiResponse<T> error(String message, Object errors) {
+        return new ApiResponse<>("ERROR", message, null, errors);
+    }
+
+    /**
+     * Phương thức static để tạo response thất bại không kèm lỗi chi tiết.
+     */
     public static <T> ApiResponse<T> error(String message) {
-        return new ApiResponse<>(message, null, false);
-    }
-
-    private ApiResponse(String message, T data, boolean success) {
-        this.message = message;
-        this.data = data;
-        this.success = success;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public boolean isSuccess() {
-        return success;
+        return new ApiResponse<>("ERROR", message, null, null);
     }
 }

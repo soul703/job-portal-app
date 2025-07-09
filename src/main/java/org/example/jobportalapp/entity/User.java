@@ -27,7 +27,7 @@ public class User extends BaseEntity {
     private String phoneNumber;
     private String address;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     @ToString.Exclude
     private Role role;

@@ -2,6 +2,7 @@ package org.example.jobportalapp.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.jobportalapp.myEnum.RoleType;
 
 @Entity
 @Getter
@@ -14,7 +15,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
-    private String name;
+    private RoleType roleName;
 }
