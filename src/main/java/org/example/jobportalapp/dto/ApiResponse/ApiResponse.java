@@ -13,8 +13,17 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse<T> {
 
-   public static <T> ApiResponse<T> success(String message, T data) {
-        return new ApiResponse<>(message, data, true);
+    private String status; // SUCCESS hoặc ERROR
+    private String message; // Mô tả kết quả xử lý
+    private T data;         // Dữ liệu thành công (nếu có)
+    private Object errors;  // Lỗi chi tiết (nếu có)
+    private final LocalDateTime timestamp = LocalDateTime.now(); // Tự động gán thời điểm phản hồi
+
+    /**
+     * Phương thức static để tạo response thành công có kèm dữ liệu.
+     */
+    public static <T> ApiResponse<T> success(T data, String message) {
+        return new ApiResponse<>("SUCCESS", message, data, null);
     }
 
     public static <T> ApiResponse<T> error(String message) {
