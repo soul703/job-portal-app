@@ -5,6 +5,8 @@ package org.example.jobportalapp.exception;
 import org.example.jobportalapp.dto.ApiResponse.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -35,6 +37,18 @@ public class GlobalExceptionHandler {
         ApiResponse<Void> response = ApiResponse.error(ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ApiResponse<Void>> handleBadCredentialsException(BadCredentialsException ex) {
+
+        ApiResponse<Void> response = ApiResponse.error("Invalid email or password."); // Trả về thông điệp chung chung
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED); // 401 Unauthorized
+    }
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ApiResponse<Void>> handleAccessDeniedException(AccessDeniedException ex) {
+        ApiResponse<Void> response = ApiResponse.error("Access denied. You do not have permission to access this resource.");
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handleGlobalException(Exception ex) {
